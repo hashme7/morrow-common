@@ -1,7 +1,7 @@
 import { NextFunction,Request,Response } from 'express';
 import { JWTService } from './../jwt/jwt';
 
-export const authenticate = (requiredRole: string) => {
+export const authenticate = () => {
     return (req: Request, res: Response, next: NextFunction) => {
         const authHeader = req.headers.authorization;
 
@@ -16,8 +16,8 @@ export const authenticate = (requiredRole: string) => {
             return res.status(401).json({ message: "Invalid token, unauthorized" });
         }
 
-        if (decoded.role !== requiredRole) {
-            return res.status(403).json({ message: `Access denied for ${decoded.role}, requires ${requiredRole}` });
+        if (decoded) {
+            return res.status(403).json({ message: `Access denied  ${decoded}` });
         }
 
         next(); 
