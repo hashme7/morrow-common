@@ -1,7 +1,7 @@
 import { NextFunction,Request,Response } from 'express';
 import { JWTService } from './../jwt/jwt';
 
-export const authenticateRole = (requiredRole: string) => {
+export const authenticate = (requiredRole: string) => {
     return (req: Request, res: Response, next: NextFunction) => {
         const authHeader = req.headers.authorization;
 
