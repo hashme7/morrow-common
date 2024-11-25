@@ -28,13 +28,13 @@ export class JWTService {
     }
   }
 
-  static verifyToken(token: string): JwtPayload | null {
+  static verifyToken(token: string): JwtPayload | Error  {
     try {
       if (!secretKey) throw new Error("No Secret Key for JSON WEB TOKEN");
       return verify(token, secretKey) as JwtPayload;
     } catch (error: any) {
       console.error("Invalid token error:", error);
-      return null;
+      throw error;
     }
   }
 }
