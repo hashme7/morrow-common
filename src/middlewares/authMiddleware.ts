@@ -9,7 +9,7 @@ export const authenticate = (
   const authHeader = req.headers.authorization;
   console.log("req",req);
 
-  console.log("req.cookiess",req.cookies)
+  console.log("req.cookiess",req.cookies);
 
   if (!authHeader || !authHeader.startsWith("Bearer")) {
     console.log("no authentication///,,")
