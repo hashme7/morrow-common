@@ -8,6 +8,8 @@ export const authenticate = (
 ) => {
   const authHeader = req.headers.authorization;
 
+  console.log("req.cookiess",req.cookies)
+
   if (!authHeader || !authHeader.startsWith("Bearer")) {
      res.status(401).json({ message: "No token provided, unauthorized" });
      return;
