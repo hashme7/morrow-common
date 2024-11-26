@@ -6,26 +6,20 @@ export const authenticate = (
   res: Response,
   next: NextFunction
 ) => {
-  const authHeader = req.headers.authorization;
-  console.log("req",req);
-
-  console.log("req.cookiess",req.cookies);
-
-  if (!authHeader || !authHeader.startsWith("Bearer")) {
-    console.log("no authentication///,,")
-     res.status(401).json({ message: "No token provided, unauthorized" });
-     return;
-  }
-
-  const token = authHeader.split(" ")[1];  
-
-  const decoded = JWTService.verifyToken(token) as { role:string,id:string};
-  if (!decoded.id || !decoded.role) {
-    console.log("invalied dfkasdjfkajskdjfkasjdkfjaksjd;f")
-    res.status(401).json({ message: "Invalid token, unauthorized" });
+  const accessToken = req.cookies.accessToken;
+  const decodedAT = JWTService.verifyToken(accessToken);
+  if (!decodedAT) {
+    const refreshToken = req.cookies.refreshToken;
+    const decodedRT = JWTService.verifyToken(refreshToken);
+    if (decodedRT) {
+      next();
+    }else{
+      res.status(401).json({message:"unathorised"});
+    }
+  } else {
+    next();
   }
   // if (decoded) {
   //   res.status(403).json({ message: `Access denied  ${decoded}` })
   // }
-  next();
 };
