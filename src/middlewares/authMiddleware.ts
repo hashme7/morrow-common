@@ -17,7 +17,7 @@ export const authenticate = (
      return;
   }
 
-  const token = authHeader.split(" ")[1];
+  const token = authHeader.split(" ")[1];  
 
   const decoded = JWTService.verifyToken(token) as { role:string,id:string};
   if (!decoded.id || !decoded.role) {
