@@ -3,11 +3,10 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const secretKey = process.env.JWT_SECRET;
-
 export class JWTService {
   static createAccessToken(id: string, role: string): string {
     try {
+      const secretKey = process.env.JWT_SECRET;
       if (!secretKey) throw new Error("No Secret Key for JSON WEB TOKEN");
       const payload = { id, role };
       return sign(payload, secretKey, { expiresIn: "24h" });
@@ -19,6 +18,7 @@ export class JWTService {
 
   static createRefreshToken(id: string, role: string): string {
     try {
+      const secretKey = process.env.JWT_SECRET;
       if (!secretKey) throw new Error("No Secret Key for JSON WEB TOKEN");
       const payload = { id, role };
       return sign(payload, secretKey, { expiresIn: "7d" });
@@ -28,8 +28,9 @@ export class JWTService {
     }
   }
 
-  static verifyToken(token: string): JwtPayload | Error  {
+  static verifyToken(token: string): JwtPayload | Error {
     try {
+      const secretKey = process.env.JWT_SECRET;
       if (!secretKey) throw new Error("No Secret Key for JSON WEB TOKEN");
       return verify(token, secretKey) as JwtPayload;
     } catch (error: any) {
