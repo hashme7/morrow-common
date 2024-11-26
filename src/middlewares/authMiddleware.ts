@@ -7,6 +7,7 @@ export const authenticate = (
   next: NextFunction
 ) => {
   const authHeader = req.headers.authorization;
+  console.log("req",req);
 
   console.log("req.cookiess",req.cookies)
 
