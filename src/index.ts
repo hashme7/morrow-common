@@ -3,8 +3,7 @@ export { JWTService } from './jwt/jwt';
 export { UserServiceService,UserRequest,UserServiceServer,UserServiceClient,TeamResponse } from './grpc/user';
 import dotenv from 'dotenv'
 export  {authenticate} from './middlewares/authMiddleware';
-import path from 'path';
-dotenv.config({ path: path.resolve(__dirname, '../.env') });
+dotenv.config();
 export const environmentVariables = {
     CLOUDINARY_URL:process.env.CLOUDINARY_URL,
     CLOUDINARY_NAME:process.env.CLOUDINARY_NAME,

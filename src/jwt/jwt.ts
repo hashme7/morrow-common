@@ -7,6 +7,8 @@ export class JWTService {
   static createAccessToken(id: string, role: string): string {
     try {
       const secretKey = process.env.JWT_SECRET;
+
+      console.log(secretKey,"kasdjkfaksdfkaskdfkasdkfjasdf")
       if (!secretKey) throw new Error("No Secret Key for JSON WEB TOKEN");
       const payload = { id, role };
       return sign(payload, secretKey, { expiresIn: "24h" });
