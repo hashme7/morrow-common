@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+service UserService {
+  rpc GetTeamIds (UserRequest) returns (TeamResponse) {}
+}
+service ProjectService {
+  rpc GetProjectDetails (ProjectRequest) returns (ProjectResponse) {}
+}
+message ProjectRequest {
+  string teamId = 1 ;
+}
+message ProjectResponse {
+  string id = 1;
+  string name = 2;
+  string projectDescription = 3;
+  string teamId = 4;
+  string projectStartDate = 5;
+  string projectEndDate = 6;
+  string plannedStartDate = 7;
+  string plannedEndDate = 8; 
+}
+
+message UserRequest {
+  string userId = 1;
+}
+
+message TeamResponse {
+  repeated string teamIds = 1;
+}
