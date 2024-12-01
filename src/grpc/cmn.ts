@@ -10,7 +10,7 @@ import {
   type CallOptions,
   ChannelCredentials,
   Client,
-  type ClientOptions,
+  type ClientOptions, 
   type ClientUnaryCall, 
   type handleUnaryCall,
   makeGenericClientConstructor,  
