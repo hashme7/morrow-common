@@ -10,15 +10,15 @@ import {
   type CallOptions,
   ChannelCredentials,
   Client,
-  type ClientOptions, 
-  type ClientUnaryCall, 
+  type ClientOptions,
+  type ClientUnaryCall,
   type handleUnaryCall,
-  makeGenericClientConstructor,  
+  makeGenericClientConstructor,
   Metadata,
   type ServiceError,
   type UntypedServiceImplementation,
 } from "@grpc/grpc-js";
-import { Timestamp } from "../../google/protobuf/timestamp";
+import { Timestamp } from "../google/protobuf/timestamp";
 
 export const protobufPackage = "";
 
