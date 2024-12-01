@@ -1,6 +1,6 @@
 {
   "name": "morrow-common",
-  "version": "1.5.30",
+  "version": "1.5.31",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
