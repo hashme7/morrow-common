@@ -1,4 +1,5 @@
 syntax = "proto3";
+import "google/protobuf/timestamp.proto";
 
 service UserService {
   rpc GetTeamIds (UserRequest) returns (TeamResponse) {}
@@ -9,15 +10,20 @@ service ProjectService {
 message ProjectRequest {
   string teamId = 1 ;
 }
+
 message ProjectResponse {
-  int32 id = 1;
-  string name = 2;
-  string projectDescription = 3;
-  string teamId = 4;
-  string projectStartDate = 5;
-  string projectEndDate = 6;
-  string plannedStartDate = 7;
-  string plannedEndDate = 8; 
+  int32 id = 1; 
+  string name = 2; 
+  string projectDescription = 3; 
+  string teamId = 4; 
+
+  google.protobuf.Timestamp projectStartDate = 5; 
+  google.protobuf.Timestamp projectEndDate = 6;   
+  google.protobuf.Timestamp plannedStartDate = 7; 
+  google.protobuf.Timestamp plannedEndDate = 8;  
+
+  google.protobuf.Timestamp createdAt = 9;
+  google.protobuf.Timestamp updatedAt = 10; 
 }
 
 message UserRequest {
