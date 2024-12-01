@@ -9,7 +9,7 @@
     "clean": "del ./dist/*",
     "build": "npm run clean && tsc",
     "pub": "git add . && git commit -m \"Updates\" && npm version patch && npm run build && npm publish",
-    "proto:generate": "protoc --plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts_proto --ts_out=./src/grpc --proto_path=./src/grpc ./src/grpc/cmn.proto"
+    "proto:generate": "sh ./src/grpc/proto.gen.sh"
   },
   "keywords": [],
   "author": "",

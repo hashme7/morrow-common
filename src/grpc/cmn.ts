@@ -18,6 +18,7 @@ import {
   type ServiceError,
   type UntypedServiceImplementation,
 } from "@grpc/grpc-js";
+import { Timestamp } from "../../google/protobuf/timestamp";
 
 export const protobufPackage = "";
 
@@ -30,10 +31,12 @@ export interface ProjectResponse {
   name: string;
   projectDescription: string;
   teamId: string;
-  projectStartDate: string;
-  projectEndDate: string;
-  plannedStartDate: string;
-  plannedEndDate: string;
+  projectStartDate: Date | undefined;
+  projectEndDate: Date | undefined;
+  plannedStartDate: Date | undefined;
+  plannedEndDate: Date | undefined;
+  createdAt: Date | undefined;
+  updatedAt: Date | undefined;
 }
 
 export interface UserRequest {
@@ -108,10 +111,12 @@ function createBaseProjectResponse(): ProjectResponse {
     name: "",
     projectDescription: "",
     teamId: "",
-    projectStartDate: "",
-    projectEndDate: "",
-    plannedStartDate: "",
-    plannedEndDate: "",
+    projectStartDate: undefined,
+    projectEndDate: undefined,
+    plannedStartDate: undefined,
+    plannedEndDate: undefined,
+    createdAt: undefined,
+    updatedAt: undefined,
   };
 }
 
@@ -129,17 +134,23 @@ export const ProjectResponse: MessageFns<ProjectResponse> = {
     if (message.teamId !== "") {
       writer.uint32(34).string(message.teamId);
     }
-    if (message.projectStartDate !== "") {
-      writer.uint32(42).string(message.projectStartDate);
+    if (message.projectStartDate !== undefined) {
+      Timestamp.encode(toTimestamp(message.projectStartDate), writer.uint32(42).fork()).join();
     }
-    if (message.projectEndDate !== "") {
-      writer.uint32(50).string(message.projectEndDate);
+    if (message.projectEndDate !== undefined) {
+      Timestamp.encode(toTimestamp(message.projectEndDate), writer.uint32(50).fork()).join();
     }
-    if (message.plannedStartDate !== "") {
-      writer.uint32(58).string(message.plannedStartDate);
+    if (message.plannedStartDate !== undefined) {
+      Timestamp.encode(toTimestamp(message.plannedStartDate), writer.uint32(58).fork()).join();
     }
-    if (message.plannedEndDate !== "") {
-      writer.uint32(66).string(message.plannedEndDate);
+    if (message.plannedEndDate !== undefined) {
+      Timestamp.encode(toTimestamp(message.plannedEndDate), writer.uint32(66).fork()).join();
+    }
+    if (message.createdAt !== undefined) {
+      Timestamp.encode(toTimestamp(message.createdAt), writer.uint32(74).fork()).join();
+    }
+    if (message.updatedAt !== undefined) {
+      Timestamp.encode(toTimestamp(message.updatedAt), writer.uint32(82).fork()).join();
     }
     return writer;
   },
@@ -188,7 +199,7 @@ export const ProjectResponse: MessageFns<ProjectResponse> = {
             break;
           }
 
-          message.projectStartDate = reader.string();
+          message.projectStartDate = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           continue;
         }
         case 6: {
@@ -196,7 +207,7 @@ export const ProjectResponse: MessageFns<ProjectResponse> = {
             break;
           }
 
-          message.projectEndDate = reader.string();
+          message.projectEndDate = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           continue;
         }
         case 7: {
@@ -204,7 +215,7 @@ export const ProjectResponse: MessageFns<ProjectResponse> = {
             break;
           }
 
-          message.plannedStartDate = reader.string();
+          message.plannedStartDate = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           continue;
         }
         case 8: {
@@ -212,7 +223,23 @@ export const ProjectResponse: MessageFns<ProjectResponse> = {
             break;
           }
 
-          message.plannedEndDate = reader.string();
+          message.plannedEndDate = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 9: {
+          if (tag !== 74) {
+            break;
+          }
+
+          message.createdAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 10: {
+          if (tag !== 82) {
+            break;
+          }
+
+          message.updatedAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           continue;
         }
       }
@@ -230,10 +257,12 @@ export const ProjectResponse: MessageFns<ProjectResponse> = {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       projectDescription: isSet(object.projectDescription) ? globalThis.String(object.projectDescription) : "",
       teamId: isSet(object.teamId) ? globalThis.String(object.teamId) : "",
-      projectStartDate: isSet(object.projectStartDate) ? globalThis.String(object.projectStartDate) : "",
-      projectEndDate: isSet(object.projectEndDate) ? globalThis.String(object.projectEndDate) : "",
-      plannedStartDate: isSet(object.plannedStartDate) ? globalThis.String(object.plannedStartDate) : "",
-      plannedEndDate: isSet(object.plannedEndDate) ? globalThis.String(object.plannedEndDate) : "",
+      projectStartDate: isSet(object.projectStartDate) ? fromJsonTimestamp(object.projectStartDate) : undefined,
+      projectEndDate: isSet(object.projectEndDate) ? fromJsonTimestamp(object.projectEndDate) : undefined,
+      plannedStartDate: isSet(object.plannedStartDate) ? fromJsonTimestamp(object.plannedStartDate) : undefined,
+      plannedEndDate: isSet(object.plannedEndDate) ? fromJsonTimestamp(object.plannedEndDate) : undefined,
+      createdAt: isSet(object.createdAt) ? fromJsonTimestamp(object.createdAt) : undefined,
+      updatedAt: isSet(object.updatedAt) ? fromJsonTimestamp(object.updatedAt) : undefined,
     };
   },
 
@@ -251,17 +280,23 @@ export const ProjectResponse: MessageFns<ProjectResponse> = {
     if (message.teamId !== "") {
       obj.teamId = message.teamId;
     }
-    if (message.projectStartDate !== "") {
-      obj.projectStartDate = message.projectStartDate;
+    if (message.projectStartDate !== undefined) {
+      obj.projectStartDate = message.projectStartDate.toISOString();
     }
-    if (message.projectEndDate !== "") {
-      obj.projectEndDate = message.projectEndDate;
+    if (message.projectEndDate !== undefined) {
+      obj.projectEndDate = message.projectEndDate.toISOString();
     }
-    if (message.plannedStartDate !== "") {
-      obj.plannedStartDate = message.plannedStartDate;
+    if (message.plannedStartDate !== undefined) {
+      obj.plannedStartDate = message.plannedStartDate.toISOString();
     }
-    if (message.plannedEndDate !== "") {
-      obj.plannedEndDate = message.plannedEndDate;
+    if (message.plannedEndDate !== undefined) {
+      obj.plannedEndDate = message.plannedEndDate.toISOString();
+    }
+    if (message.createdAt !== undefined) {
+      obj.createdAt = message.createdAt.toISOString();
+    }
+    if (message.updatedAt !== undefined) {
+      obj.updatedAt = message.updatedAt.toISOString();
     }
     return obj;
   },
@@ -275,10 +310,12 @@ export const ProjectResponse: MessageFns<ProjectResponse> = {
     message.name = object.name ?? "";
     message.projectDescription = object.projectDescription ?? "";
     message.teamId = object.teamId ?? "";
-    message.projectStartDate = object.projectStartDate ?? "";
-    message.projectEndDate = object.projectEndDate ?? "";
-    message.plannedStartDate = object.plannedStartDate ?? "";
-    message.plannedEndDate = object.plannedEndDate ?? "";
+    message.projectStartDate = object.projectStartDate ?? undefined;
+    message.projectEndDate = object.projectEndDate ?? undefined;
+    message.plannedStartDate = object.plannedStartDate ?? undefined;
+    message.plannedEndDate = object.plannedEndDate ?? undefined;
+    message.createdAt = object.createdAt ?? undefined;
+    message.updatedAt = object.updatedAt ?? undefined;
     return message;
   },
 };
@@ -497,6 +534,28 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+
+function toTimestamp(date: Date): Timestamp {
+  const seconds = Math.trunc(date.getTime() / 1_000);
+  const nanos = (date.getTime() % 1_000) * 1_000_000;
+  return { seconds, nanos };
+}
+
+function fromTimestamp(t: Timestamp): Date {
+  let millis = (t.seconds || 0) * 1_000;
+  millis += (t.nanos || 0) / 1_000_000;
+  return new globalThis.Date(millis);
+}
+
+function fromJsonTimestamp(o: any): Date {
+  if (o instanceof globalThis.Date) {
+    return o;
+  } else if (typeof o === "string") {
+    return new globalThis.Date(o);
+  } else {
+    return fromTimestamp(Timestamp.fromJSON(o));
+  }
+}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
