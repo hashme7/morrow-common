@@ -31,8 +31,8 @@ export interface ProjectResponse {
   name: string;
   projectDescription: string;
   teamId: string;
-  projectStartDate: Date | undefined;
-  projectEndDate: Date | undefined;
+  projectStartDate?: Date | undefined;
+  projectEndDate?: Date | undefined;
   plannedStartDate: Date | undefined;
   plannedEndDate: Date | undefined;
   createdAt: Date | undefined;
