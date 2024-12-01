@@ -26,7 +26,7 @@ export interface ProjectRequest {
 }
 
 export interface ProjectResponse {
-  id: string;
+  id: number;
   name: string;
   projectDescription: string;
   teamId: string;
@@ -104,7 +104,7 @@ export const ProjectRequest: MessageFns<ProjectRequest> = {
 
 function createBaseProjectResponse(): ProjectResponse {
   return {
-    id: "",
+    id: 0,
     name: "",
     projectDescription: "",
     teamId: "",
@@ -117,8 +117,8 @@ function createBaseProjectResponse(): ProjectResponse {
 
 export const ProjectResponse: MessageFns<ProjectResponse> = {
   encode(message: ProjectResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.id !== "") {
-      writer.uint32(10).string(message.id);
+    if (message.id !== 0) {
+      writer.uint32(8).int32(message.id);
     }
     if (message.name !== "") {
       writer.uint32(18).string(message.name);
@@ -152,11 +152,11 @@ export const ProjectResponse: MessageFns<ProjectResponse> = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
-          if (tag !== 10) {
+          if (tag !== 8) {
             break;
           }
 
-          message.id = reader.string();
+          message.id = reader.int32();
           continue;
         }
         case 2: {
@@ -226,7 +226,7 @@ export const ProjectResponse: MessageFns<ProjectResponse> = {
 
   fromJSON(object: any): ProjectResponse {
     return {
-      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      id: isSet(object.id) ? globalThis.Number(object.id) : 0,
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       projectDescription: isSet(object.projectDescription) ? globalThis.String(object.projectDescription) : "",
       teamId: isSet(object.teamId) ? globalThis.String(object.teamId) : "",
@@ -239,8 +239,8 @@ export const ProjectResponse: MessageFns<ProjectResponse> = {
 
   toJSON(message: ProjectResponse): unknown {
     const obj: any = {};
-    if (message.id !== "") {
-      obj.id = message.id;
+    if (message.id !== 0) {
+      obj.id = Math.round(message.id);
     }
     if (message.name !== "") {
       obj.name = message.name;
@@ -271,7 +271,7 @@ export const ProjectResponse: MessageFns<ProjectResponse> = {
   },
   fromPartial<I extends Exact<DeepPartial<ProjectResponse>, I>>(object: I): ProjectResponse {
     const message = createBaseProjectResponse();
-    message.id = object.id ?? "";
+    message.id = object.id ?? 0;
     message.name = object.name ?? "";
     message.projectDescription = object.projectDescription ?? "";
     message.teamId = object.teamId ?? "";
