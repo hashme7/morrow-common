@@ -12,7 +12,7 @@ import {
   Client,
   type ClientOptions,
   type ClientUnaryCall,
-  type handleUnaryCall, 
+  type handleUnaryCall,
   makeGenericClientConstructor,
   Metadata,
   type ServiceError,
@@ -35,8 +35,8 @@ export interface ProjectResponse {
   projectEndDate?: Date | undefined;
   plannedStartDate: Date | undefined;
   plannedEndDate: Date | undefined;
-  createdAt: Date | undefined;
-  updatedAt: Date | undefined;
+  createdAt?: Date | undefined;
+  updatedAt?: Date | undefined;
 }
 
 export interface UserRequest {
