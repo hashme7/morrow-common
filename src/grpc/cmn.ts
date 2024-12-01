@@ -13,7 +13,7 @@ import {
   type ClientOptions,
   type ClientUnaryCall,
   type handleUnaryCall,
-  makeGenericClientConstructor,
+  makeGenericClientConstructor,  
   Metadata,
   type ServiceError,
   type UntypedServiceImplementation,
