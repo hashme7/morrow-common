@@ -9,8 +9,8 @@ export {
   ProjectServiceServer,
   ProjectServiceClient,
   ProjectServiceService,
+  ProjectsResponse,
   ProjectRequest,
-  ProjectResponse,
 } from "./grpc/cmn";
 import dotenv from "dotenv";
 export { authenticate } from "./middlewares/authMiddleware";

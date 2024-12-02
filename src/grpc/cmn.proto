@@ -4,14 +4,22 @@ import "google/protobuf/timestamp.proto";
 service UserService {
   rpc GetTeamIds (UserRequest) returns (TeamResponse) {}
 }
+
 service ProjectService {
-  rpc GetProjectDetails (ProjectRequest) returns (ProjectResponse) {}
-}
-message ProjectRequest {
-  string teamId = 1 ;
+  rpc GetProjectDetails (ProjectRequest) returns (ProjectsResponse) {}
 }
 
-message ProjectResponse {
+message ProjectRequest {
+  // Array of team IDs
+  repeated string teamIds = 1;
+}
+
+message ProjectsResponse {
+  // Array of Project objects
+  repeated Project projects = 1;
+}
+
+message Project {
   int32 id = 1; 
   string name = 2; 
   string projectDescription = 3; 
