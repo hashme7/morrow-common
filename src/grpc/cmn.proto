@@ -16,12 +16,10 @@ message ProjectResponse {
   string name = 2; 
   string projectDescription = 3; 
   string teamId = 4; 
-
   optional google.protobuf.Timestamp projectStartDate = 5; 
   optional google.protobuf.Timestamp projectEndDate = 6;   
   google.protobuf.Timestamp plannedStartDate = 7; 
   google.protobuf.Timestamp plannedEndDate = 8;  
-
   optional google.protobuf.Timestamp createdAt = 9;
   optional google.protobuf.Timestamp updatedAt = 10; 
 }
