@@ -1,13 +1,6 @@
 syntax = "proto3";
 import "google/protobuf/timestamp.proto";
 
-service UserService {
-  rpc GetTeamIds (UserRequest) returns (TeamResponse) {}
-}
-
-service ProjectService {
-  rpc GetProjectDetails (ProjectRequest) returns (ProjectsResponse) {}
-}
 
 message ProjectRequest {
   // Array of team IDs
@@ -38,4 +31,11 @@ message UserRequest {
 
 message TeamResponse {
   repeated string teamIds = 1;
+}
+service UserService {
+  rpc GetTeamIds (UserRequest) returns (TeamResponse) {}
+}
+
+service ProjectService {
+  rpc GetProjectDetails (ProjectRequest) returns (ProjectsResponse) {}
 }
