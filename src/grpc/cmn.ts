@@ -255,7 +255,7 @@ export const Project: MessageFns<Project> = {
           continue;
         }
         case 4: {
-          if (tag !== 34) {
+          if (tag !== 34) {  
             break;
           }
 
