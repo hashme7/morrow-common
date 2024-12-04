@@ -22,7 +22,7 @@ import { Timestamp } from "../google/protobuf/timestamp";
 
 export const protobufPackage = "";
 
-export interface ProjectRequest {
+export interface ProjectRequest {  
   /** Array of team IDs */ 
   teamIds: string[];
 }
