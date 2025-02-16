@@ -7,6 +7,12 @@ export const authenticate = (
   next: NextFunction
 ) => {
   const accessToken = req.cookies.accessToken;
+  console.log(`
+    
+    access Token :- ${accessToken};
+    
+    
+    `)
   const decodedAT = JWTService.verifyToken(accessToken);
   if (!decodedAT) {
     const refreshToken = req.cookies.refreshToken;
