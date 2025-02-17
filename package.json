@@ -7,7 +7,7 @@
   "type": "commonjs",
   "scripts": {
     "clean": "del ./dist/*",
-    "build": "tsc",
+    "build": "npm run clean && tsc -b",
     "pub": "git add . && git commit -m \"Updates\" && npm version patch && npm run build && npm publish",
     "proto:generate": "sh ./src/grpc/proto.gen.sh"
   },
