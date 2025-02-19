@@ -1,1 +1,1 @@
-{"root":["./src/index.ts","./src/google/protobuf/timestamp.ts","./src/grpc/cmn.ts","./src/jwt/jwt.ts","./src/library/delay.ts","./src/middlewares/authMiddleware.ts"],"version":"5.7.3"}
+{"root":["./src/index.ts","./src/google/protobuf/timestamp.ts","./src/grpc/cmn.ts","./src/jwt/jwt.ts","./src/library/delay.ts","./src/middlewares/authMiddleware.ts","./src/middlewares/setParamsMiddleware.ts"],"version":"5.7.3"}

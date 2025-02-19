@@ -12,6 +12,7 @@ export {
   ProjectsResponse,
   ProjectRequest,
 } from "./grpc/cmn";
+export {modify} from './middlewares/setParamsMiddleware'
 import dotenv from "dotenv";
 export { authenticate } from "./middlewares/authMiddleware";
 dotenv.config();
