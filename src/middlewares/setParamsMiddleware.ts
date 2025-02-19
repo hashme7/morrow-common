@@ -11,5 +11,5 @@ export const modify = (req: Request, res: Response, next: NextFunction) => {
   if (decodedAt) {
     req.params.userId = decodedAt.id;
   }
-  next();
+  next(); 
 };
