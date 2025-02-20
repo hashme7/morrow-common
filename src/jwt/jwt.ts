@@ -15,7 +15,7 @@ export class JWTService {
       console.log(secretKey, "kasdjkfaksdfkaskdfkasdkfjasdf");
       if (!secretKey) throw new Error("No Secret Key for JSON WEB TOKEN");
       const payload = { id, role };
-      return sign(payload, secretKey, { expiresIn: "24h" });
+      return sign(payload, secretKey, { expiresIn: "24h", algorithm: "HS256" });
     } catch (error) {
       console.log(error);
       return "error on create acess token";
@@ -26,7 +26,7 @@ export class JWTService {
     try {
       if (!secretKey) throw new Error("No Secret Key for JSON WEB TOKEN");
       const payload = { id, role };
-      return sign(payload, secretKey, { expiresIn: "7d" });
+      return sign(payload, secretKey, { expiresIn: "7d", algorithm: "HS256" });
     } catch (error) {
       console.log(error);
       return "error on create refresh token";
@@ -39,7 +39,9 @@ export class JWTService {
       if (!token) throw new Error("token is not provided");
       console.log(token, "secret and token", secretKey);
       token.trim();
-      return verify(token, secretKey) as CustomJwtPayload;
+      return verify(token, secretKey, {
+        algorithms: ["HS256"],
+      }) as CustomJwtPayload;
     } catch (error: any) {
       console.error("Invalid token error:", error);
       throw error;
