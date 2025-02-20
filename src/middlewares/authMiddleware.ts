@@ -9,6 +9,7 @@ export const authenticate = (
   try {
     const accessToken = req.cookies.accessToken;
     const decodedAT = JWTService.verifyToken(accessToken);
+    console.log("accessToken from authmiddleware", accessToken);
     if (!decodedAT) {
       const refreshToken = req.cookies.refreshToken;
       const decodedRT = JWTService.verifyToken(refreshToken);
@@ -23,7 +24,8 @@ export const authenticate = (
       next();
     }
   } catch (error) {
-    res.status(500).json({message:error,})
+    console.log('error on authmiddleware :', error);
+    res.status(500).json({message:error})
   }
 };
 

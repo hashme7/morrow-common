@@ -9,7 +9,7 @@ export const modify = (req: Request, res: Response, next: NextFunction) => {
         )
       : {};
     if (cookies) {
-      console.log("cookies:", cookies);
+      console.log("cookies from modify:", cookies);
       const decodedAt = JWTService.verifyToken(cookies.accessToken);
       if (decodedAt) {
         req.params.userId = decodedAt.id;
@@ -19,6 +19,7 @@ export const modify = (req: Request, res: Response, next: NextFunction) => {
       res.status(404).json({ cookies: cookies });
     }
   } catch (error) {
+    console.log("error from modify:")
     res.status(500).json(error);
   }
   
