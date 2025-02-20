@@ -10,6 +10,8 @@ export const modify = (req: Request, res: Response, next: NextFunction) => {
       : {};
     if (cookies) {
       console.log("cookies from modify:", cookies);
+      console.log("cookie:",cookies.accessToken, typeof cookies.accessToken, typeof cookies.refreshToken);
+      
       const decodedAt = JWTService.verifyToken(cookies.accessToken);
       if (decodedAt) {
         req.params.userId = decodedAt.id;
