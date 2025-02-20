@@ -36,6 +36,7 @@ export class JWTService {
   static verifyToken(token: string): CustomJwtPayload {
     try {
       if (!secretKey) throw new Error("No Secret Key for JSON WEB TOKEN");
+      if (!token) throw new Error("token is not provided");
       return verify(token, secretKey) as CustomJwtPayload;
     } catch (error: any) {
       console.error("Invalid token error:", error);
