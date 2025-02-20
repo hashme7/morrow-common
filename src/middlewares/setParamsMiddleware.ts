@@ -3,6 +3,13 @@ import { JWTService } from "../jwt/jwt";
 
 export const modify = (req: Request, res: Response, next: NextFunction) => {
   try {
+    if (req.cookies.accessToken) {
+      const accessToken = req.cookies.accessToken;
+      const decodedAcsTkn = JWTService.verifyToken(accessToken);
+      req.params.userId = decodedAcsTkn.id;
+      next();
+      return;
+    }
     const cookies = req.headers.cookie
       ? Object.fromEntries(
           req.headers.cookie.split("; ").map((c) => c.split("="))
