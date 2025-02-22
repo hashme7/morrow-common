@@ -3,6 +3,7 @@ import { JWTService } from "../jwt/jwt";
 
 export const modify = (req: Request, res: Response, next: NextFunction) => {
   try {
+    console.log("JWT Verify:-",JWTService.verifyToken,req.cookies.accessToken)
     if (req.cookies.accessToken) {
       const accessToken = req.cookies.accessToken;
       const decodedAcsTkn = JWTService.verifyToken(accessToken);
