@@ -2,7 +2,7 @@ import { sign, verify, JwtPayload } from "jsonwebtoken";
 import dotenv from "dotenv";
 
 dotenv.config();
-const secretKey = process.env.JWT_SECRET || "secretjwtKey";
+const secretKey = "secretjwtKey";
 
 export interface CustomJwtPayload extends JwtPayload {
   id: string;
